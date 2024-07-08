@@ -5,4 +5,8 @@ import jakarta.persistence.Entity;
 @Entity
 public class Book {
 
+    private Integer id;
+    private String title;
+    private String isbn;
+
 }
