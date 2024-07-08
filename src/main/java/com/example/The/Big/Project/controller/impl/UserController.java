@@ -21,7 +21,4 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    public String getGreeting(){
-        return "Hello 102Foxtrot!";
-    }
 }
