@@ -18,4 +18,14 @@ public class Author {
     private String name;
     private String bio;
     private String website;
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", bio='" + bio + '\'' +
+                ", website='" + website + '\'' +
+                '}';
+    }
 }
