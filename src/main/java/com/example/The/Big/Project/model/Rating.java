@@ -2,6 +2,7 @@ package com.example.The.Big.Project.model;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Rating {
+    @Id
     private Integer plot;
     private Integer pace;
     private Integer tone;

@@ -15,8 +15,9 @@ public class RatingService implements IRatingService {
     @Autowired
     RatingRepository ratingRepository;
 
+
     @Override
-    public List<Rating> findAll() {
+    public List<Rating> getAllRatings() {
         return ratingRepository.findAll();
     }
 }

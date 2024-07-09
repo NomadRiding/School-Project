@@ -3,7 +3,6 @@ package com.example.The.Big.Project.controller.impl;
 
 import com.example.The.Big.Project.model.Rating;
 import com.example.The.Big.Project.repository.RatingRepository;
-import com.example.The.Big.Project.service.interfaces.IAuthorService;
 import com.example.The.Big.Project.service.interfaces.IRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +22,6 @@ IRatingService ratingService;
 
 @GetMapping("/ratings")
     public List<Rating> getAllRatings(){
-    return ratingService.findAll();
+    return ratingService.getAllRatings();
   }
 }

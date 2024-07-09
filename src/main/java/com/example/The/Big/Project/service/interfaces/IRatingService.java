@@ -5,5 +5,6 @@ import com.example.The.Big.Project.model.Rating;
 import java.util.List;
 
 public interface IRatingService {
-    List<Rating> findAll();
+
+    List<Rating> getAllRatings();
 }
