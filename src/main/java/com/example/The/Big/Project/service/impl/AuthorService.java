@@ -1,6 +1,7 @@
 package com.example.The.Big.Project.service.impl;
 
 import com.example.The.Big.Project.model.Author;
+import com.example.The.Big.Project.model.Rating;
 import com.example.The.Big.Project.repository.AuthorRepository;
 import com.example.The.Big.Project.service.interfaces.IAuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,5 @@ public class AuthorService implements IAuthorService {
         if(authorOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Author " + id + " not found");
         return authorOptional.get();
     }
+
 }
