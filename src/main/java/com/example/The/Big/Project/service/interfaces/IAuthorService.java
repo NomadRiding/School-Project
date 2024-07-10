@@ -14,4 +14,6 @@ public interface IAuthorService {
     Author saveAuthor(Author author);
 
     void deleteAuthor(Integer id);
+
+    void updateAuthor(Author author, Integer id);
 }
