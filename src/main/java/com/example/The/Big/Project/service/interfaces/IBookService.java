@@ -16,4 +16,6 @@ public interface IBookService {
     void updateBook(Book book, Integer id);
 
     void deleteBook(Integer id);
+
+    Book saveBook(Book book);
 }
