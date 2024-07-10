@@ -4,6 +4,7 @@ import com.example.The.Big.Project.controller.interfaces.IAuthorController;
 import com.example.The.Big.Project.service.interfaces.IAuthorService;
 import com.example.The.Big.Project.repository.AuthorRepository;
 import com.example.The.Big.Project.model.Author;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,16 @@ public class AuthorController implements IAuthorController {
     public Author createAuthor(@PathVariable Integer authorId, @RequestBody Author author){
         return authorService.saveAuthor(author);
     }
+
+
+    //  ****************************************************  PUT  ****************************************************
+
+    @PutMapping("/authors/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateAuthor(@RequestBody @Valid Author author, @PathVariable Integer id){
+        authorService.updateAuthor(author, id);
+    }
+
 
     //  ****************************************************  DELETE  ****************************************************
 

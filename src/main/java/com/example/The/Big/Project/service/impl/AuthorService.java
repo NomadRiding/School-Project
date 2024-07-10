@@ -40,4 +40,9 @@ public class AuthorService implements IAuthorService {
         authorRepository.deleteById(id);
     }
 
+    @Override
+    public void updateAuthor(Author author, Integer id) {
+
+    }
+
 }
