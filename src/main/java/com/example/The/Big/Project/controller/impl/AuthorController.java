@@ -33,6 +33,8 @@ public class AuthorController implements IAuthorController {
 
     //  ****************************************************  POST  ****************************************************
 
+    @PostMapping("Author/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Author createAuthor(@PathVariable Integer authorId, @RequestBody Author author){
         return authorService.saveAuthor(author);
     }

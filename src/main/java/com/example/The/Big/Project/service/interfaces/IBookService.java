@@ -9,9 +9,7 @@ import java.util.List;
 public interface IBookService {
     List<Book> getAllBooks();
 
-    Book getBook(Integer id);
-
-    void updateCourse(Book book, Integer id);
+    Book getBookById(Integer id);
 
     void updateBook(Book book, Integer id);
 
