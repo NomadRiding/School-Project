@@ -4,20 +4,26 @@ import com.example.The.Big.Project.model.Book;
 import com.example.The.Big.Project.model.Rating;
 import com.example.The.Big.Project.service.interfaces.IBookService;
 import com.example.The.Big.Project.service.interfaces.IRatingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class BookController {
+public class
+BookController {
 
     @Autowired
     private IBookService bookService;
 
     @Autowired
     IRatingService ratingService;
+
+    //  ****************************************************  GET  ****************************************************
+
 
     @GetMapping("/books")
     public List<Book> getAllBooks(){
@@ -30,11 +36,32 @@ public class BookController {
     }
 
 
+//  ****************************************************  POST  ****************************************************
 
 
     @PostMapping("/{bookId}/ratings")
     public Rating createRating(@PathVariable Integer bookId, @RequestBody Rating rating) {
         return ratingService.saveRating(bookId, rating);
     }
+
+
+    //  ****************************************************  PUT  ****************************************************
+
+    @PutMapping("/books/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateBook(@RequestBody @Valid Book book, @PathVariable Integer id){
+        bookService.updateBook(book, id);
+    }
+
+
+    //  ****************************************************  DELETE  ****************************************************
+    @DeleteMapping("/courses/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable Integer id) {
+        bookService.deleteBook(id);
+    }
+
 }
+
+
 

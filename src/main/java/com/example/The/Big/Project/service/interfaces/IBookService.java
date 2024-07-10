@@ -10,4 +10,10 @@ public interface IBookService {
     List<Book> getAllBooks();
 
     Book getBook(Integer id);
+
+    void updateCourse(Book book, Integer id);
+
+    void updateBook(Book book, Integer id);
+
+    void deleteBook(Integer id);
 }
