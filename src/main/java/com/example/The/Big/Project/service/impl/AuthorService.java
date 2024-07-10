@@ -28,4 +28,16 @@ public class AuthorService implements IAuthorService {
         return authorOptional.get();
     }
 
+    @Override
+    public Author saveAuthor(Author author) {
+        return authorRepository.save(author);
+    }
+
+    @Override
+    public void deleteAuthor(Integer id){
+        Optional<Author> authorOptional = authorRepository.findById(id);
+        if (authorOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Author " + id + " not found.");
+        authorRepository.deleteById(id);
+    }
+
 }
