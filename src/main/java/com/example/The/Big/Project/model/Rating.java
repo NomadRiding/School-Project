@@ -1,8 +1,7 @@
 package com.example.The.Big.Project.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +10,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Rating {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private Integer plot;
     private Integer pace;
     private Integer tone;
     private Integer worldDevelopment;
     private Integer reRead;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    public double calculateAverageRating() {
+        return (plot + pace + tone + worldDevelopment + reRead) / 5.0;
+    }
+
+    @Override
+    public String toString() {
+        return "Rating{" +
+                "reRead=" + reRead +
+                ", worldDevelopment=" + worldDevelopment +
+                ", tone=" + tone +
+                ", pace=" + pace +
+                ", plot=" + plot +
+                ", id=" + id +
+                '}';
+    }
 }
