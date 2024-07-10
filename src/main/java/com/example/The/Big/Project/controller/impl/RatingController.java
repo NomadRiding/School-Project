@@ -14,14 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class RatingController {
-@Autowired
-IRatingService ratingService;
+    @Autowired
+    IRatingService ratingService;
 
 
     //  ****************************************************  GET  ****************************************************
 
-@GetMapping("/ratings")
-    public List<Rating> getAllRatings(){
-    return ratingService.getAllRatings();
-  }
-}
+    @GetMapping("/ratings")
+        public List<Rating> getAllRatings(){
+        return ratingService.updateAverageRating();
+      }
+    }

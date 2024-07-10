@@ -11,4 +11,6 @@ public interface IRatingService {
     List<Rating> getAllRatings();
 
     Rating saveRating(Integer bookId, Rating rating);
+
+    List<Rating> updateAverageRating();
 }
