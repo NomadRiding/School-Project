@@ -25,10 +25,26 @@ public class RatingService implements IRatingService {
         return ratingRepository.findAll();
     }
 
+    public double calculateAverageRating(Rating rating) {
+        return (rating.getPlot() + rating.getPace() + rating.getTone() + rating.getWorldDevelopment() + rating.getReRead()) / 5.0;
+    }
+
+    public Rating updateAverageRating(Rating rating) {
+        double averageRating = calculateAverageRating(rating);
+        rating.setAverageRating(averageRating);
+        return rating;
+    }
+
     public Rating saveRating(Integer bookId, Rating rating) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found"));
         rating.setBook(book);
         return ratingRepository.save(rating);
     }
+
+    @Override
+    public List<Rating> updateAverageRating() {
+        return List.of();
+    }
+
 }
