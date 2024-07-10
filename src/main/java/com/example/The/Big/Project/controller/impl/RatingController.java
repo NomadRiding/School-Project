@@ -3,11 +3,13 @@ package com.example.The.Big.Project.controller.impl;
 
 import com.example.The.Big.Project.model.Rating;
 import com.example.The.Big.Project.repository.RatingRepository;
+import com.example.The.Big.Project.service.impl.RatingService;
 import com.example.The.Big.Project.service.interfaces.IRatingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -15,13 +17,39 @@ import java.util.List;
 @RequestMapping("/api")
 public class RatingController {
     @Autowired
-    IRatingService ratingService;
+    RatingService ratingService;
+
 
 
     //  ****************************************************  GET  ****************************************************
 
     @GetMapping("/ratings")
-        public List<Rating> getAllRatings(){
+    public List<Rating> getAllRatings(){
         return ratingService.updateAverageRating();
-      }
     }
+
+
+
+    //  ****************************************************  POST  ****************************************************
+
+
+    @PostMapping("/{bookId}/ratings")
+    public Rating createRating(@PathVariable Integer bookId, @RequestBody Rating rating) {
+        return ratingService.saveRating(bookId, rating);
+    }
+
+
+    //  ****************************************************  PUT  ****************************************************
+
+    @PutMapping("/ratings/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateRating(@RequestBody @Valid Rating rating, @PathVariable Integer id){
+        ratingService.updateRating(id);
+    }
+
+    //  ****************************************************  DELETE  ****************************************************
+
+    public void deleteRating(@PathVariable Integer id){
+        ratingService.deleteRating(id);
+    }
+}

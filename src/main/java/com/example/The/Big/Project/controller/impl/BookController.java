@@ -19,8 +19,6 @@ BookController {
     @Autowired
     private IBookService bookService;
 
-    @Autowired
-    IRatingService ratingService;
 
     //  ****************************************************  GET  ****************************************************
 
@@ -36,13 +34,14 @@ BookController {
     }
 
 
-//  ****************************************************  POST  ****************************************************
+    //  ****************************************************  POST  ****************************************************
 
-
-    @PostMapping("/{bookId}/ratings")
-    public Rating createRating(@PathVariable Integer bookId, @RequestBody Rating rating) {
-        return ratingService.saveRating(bookId, rating);
+    public Book createBook(@PathVariable Integer id, @RequestBody Book book){
+        return bookService.saveBook(book);
     }
+
+
+
 
 
     //  ****************************************************  PUT  ****************************************************

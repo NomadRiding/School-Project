@@ -9,8 +9,10 @@ import java.util.List;
 public interface IRatingService {
 
     List<Rating> getAllRatings();
-
+    Rating getRatingById(Integer id);
     Rating saveRating(Integer bookId, Rating rating);
+    void deleteRating(Integer id);
+    void updateRating(Integer id);
 
     List<Rating> updateAverageRating();
 }

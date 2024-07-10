@@ -1,16 +1,17 @@
 package com.example.The.Big.Project.service.impl;
 
-
-import com.example.The.Big.Project.controller.impl.RatingController;
 import com.example.The.Big.Project.model.Book;
 import com.example.The.Big.Project.model.Rating;
 import com.example.The.Big.Project.repository.BookRepository;
 import com.example.The.Big.Project.repository.RatingRepository;
 import com.example.The.Big.Project.service.interfaces.IRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RatingService implements IRatingService {
@@ -25,6 +26,11 @@ public class RatingService implements IRatingService {
         return ratingRepository.findAll();
     }
 
+    @Override
+    public Rating getRatingById(Integer id) {
+        return null;
+    }
+
     public double calculateAverageRating(Rating rating) {
         return (rating.getPlot() + rating.getPace() + rating.getTone() + rating.getWorldDevelopment() + rating.getReRead()) / 5.0;
     }
@@ -35,6 +41,7 @@ public class RatingService implements IRatingService {
         return rating;
     }
 
+    @Override
     public Rating saveRating(Integer bookId, Rating rating) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found"));
@@ -43,8 +50,21 @@ public class RatingService implements IRatingService {
     }
 
     @Override
+    public void deleteRating(Integer id) {
+        Optional<Rating> ratingOptional = ratingRepository.findById(id);
+        if (ratingOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating " + id + " not found.");
+    }
+
+
+
+    @Override
+    public void updateRating(Integer id) {
+    }
+
+    @Override
     public List<Rating> updateAverageRating() {
         return List.of();
     }
 
 }
+
