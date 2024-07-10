@@ -18,6 +18,11 @@ public class Book {
     @ManyToOne
     private Author author;
 
+    public Book(String title, Author author){
+        this.title = title;
+        this.author = author;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -26,4 +31,5 @@ public class Book {
                 ", isbn='" + isbn + '\'' +
                 '}';
     }
+
 }
