@@ -2,6 +2,7 @@ package com.example.The.Big.Project.controller.impl;
 
 import com.example.The.Big.Project.model.Book;
 import com.example.The.Big.Project.model.Rating;
+import com.example.The.Big.Project.service.impl.BookService;
 import com.example.The.Big.Project.service.interfaces.IBookService;
 import com.example.The.Big.Project.service.interfaces.IRatingService;
 import jakarta.validation.Valid;
@@ -13,11 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class
-BookController {
+public class BookController implements IBookService{
 
     @Autowired
-    private IBookService bookService;
+    IBookService bookService;
 
 
     //  ****************************************************  GET  ****************************************************
@@ -28,19 +28,19 @@ BookController {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/{id}")
-    public Book getBook(@PathVariable Integer id) {
-        return bookService.getBook(id);
+    @GetMapping("/books/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book getBookById(@PathVariable Integer id) {
+        return bookService.getBookById(id);
     }
 
 
     //  ****************************************************  POST  ****************************************************
 
+    @PostMapping("/books/{id}")
     public Book createBook(@PathVariable Integer id, @RequestBody Book book){
         return bookService.saveBook(book);
     }
-
-
 
 
 
@@ -54,10 +54,15 @@ BookController {
 
 
     //  ****************************************************  DELETE  ****************************************************
-    @DeleteMapping("/courses/{id}")
+    @DeleteMapping("/books/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
+    }
+
+    @Override
+    public Book saveBook(Book book) {
+        return null;
     }
 
 }

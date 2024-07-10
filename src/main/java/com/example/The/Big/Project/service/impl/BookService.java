@@ -27,18 +27,16 @@ public class BookService implements IBookService {
         return bookRepository.save(book);
     }
 
-    public Book getBook(Integer id) {
+    public Book getBookById(Integer id) {
         return bookRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public void updateCourse(Book book, Integer id) {
-
-    }
 
     @Override
     public void updateBook(Book book, Integer id) {
-
+    Optional<Book> bookOptional = bookRepository.findById(id);
+    if(bookOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book " + id + " not found");
+    bookRepository.save(book);
     }
 
     @Override

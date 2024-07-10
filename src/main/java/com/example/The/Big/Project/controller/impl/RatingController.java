@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class RatingController {
+public class RatingController implements IRatingService{
     @Autowired
     RatingService ratingService;
 
@@ -28,6 +28,15 @@ public class RatingController {
         return ratingService.updateAverageRating();
     }
 
+    @Override
+    public Rating getRatingById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Rating saveRating(Integer bookId, Rating rating) {
+        return null;
+    }
 
 
     //  ****************************************************  POST  ****************************************************
@@ -51,5 +60,15 @@ public class RatingController {
 
     public void deleteRating(@PathVariable Integer id){
         ratingService.deleteRating(id);
+    }
+
+    @Override
+    public void updateRating(Integer id) {
+
+    }
+
+    @Override
+    public List<Rating> updateAverageRating() {
+        return List.of();
     }
 }
