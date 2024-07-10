@@ -5,10 +5,8 @@ import com.example.The.Big.Project.service.interfaces.IAuthorService;
 import com.example.The.Big.Project.repository.AuthorRepository;
 import com.example.The.Big.Project.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,19 +15,32 @@ import java.util.List;
 public class AuthorController implements IAuthorController {
 
     @Autowired
-    AuthorRepository authorRepository;
+    IAuthorService authorService;
 
 
     //  ****************************************************  GET  ****************************************************
 
     @GetMapping("/authors")
     public List<Author> getAllAuthors() {
-        return authorRepository.findAll();
+        return authorService.getAllAuthors();
     }
 
     @GetMapping("/authors/{id}")
     public Author getAuthorById(@PathVariable Integer id){
-        return authorRepository.getAuthorById(id);
+        return authorService.getAuthorById(id);
     }
 
+    //  ****************************************************  POST  ****************************************************
+
+    public Author createAuthor(@PathVariable Integer authorId, @RequestBody Author author){
+        return authorService.saveAuthor(author);
+    }
+
+    //  ****************************************************  DELETE  ****************************************************
+
+    @DeleteMapping("/authors/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAuthor(@PathVariable Integer id){
+        authorService.deleteAuthor(id);
+    }
 }

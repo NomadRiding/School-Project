@@ -11,4 +11,7 @@ public interface IAuthorService {
     List<Author> getAllAuthors();
     Author getAuthorById(Integer id);
 
+    Author saveAuthor(Author author);
+
+    void deleteAuthor(Integer id);
 }
