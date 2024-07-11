@@ -1,8 +1,10 @@
 package com.example.The.Big.Project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +16,10 @@ public class Book {
     private Integer id;
     private String title;
     private Integer isbn;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "book")
+    private List<Rating> ratings;
 
     @ManyToOne
     private Author author;
