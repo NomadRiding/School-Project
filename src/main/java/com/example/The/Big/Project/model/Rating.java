@@ -23,6 +23,9 @@ public class Rating {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @ManyToOne
+    private User user;
+
 
     @Override
     public String toString() {
