@@ -8,6 +8,7 @@ import com.example.The.Big.Project.service.interfaces.IRatingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class RatingController implements IRatingService{
     @Autowired
     RatingService ratingService;
+
 
 
 
@@ -47,6 +49,11 @@ public class RatingController implements IRatingService{
         return ratingService.saveRating(bookId, rating);
     }
 
+    @PostMapping("/{bookId}")
+    public ResponseEntity<Rating> addRating(@PathVariable Integer bookId, @RequestBody Rating rating) {
+        Rating savedRating = ratingService.saveRating(bookId, rating);
+        return ResponseEntity.ok(savedRating);
+    }
 
     //  ****************************************************  PUT  ****************************************************
 

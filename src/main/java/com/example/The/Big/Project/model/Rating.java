@@ -17,6 +17,7 @@ public class Rating {
     private Integer tone;
     private Integer worldDevelopment;
     private Integer reRead;
+    @Column(name = "average_rating")
     private double averageRating;
 
     @ManyToOne
