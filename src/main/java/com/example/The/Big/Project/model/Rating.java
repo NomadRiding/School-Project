@@ -1,6 +1,7 @@
 package com.example.The.Big.Project.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,8 @@ public class Rating {
     @Column(name = "average_rating")
     private double averageRating;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "book_id")
     private Book book;
 
     @ManyToOne
