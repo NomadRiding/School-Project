@@ -1,8 +1,10 @@
 package com.example.The.Big.Project.service.impl;
 
 import com.example.The.Big.Project.model.Book;
+import com.example.The.Big.Project.model.User;
 import com.example.The.Big.Project.model.Rating;
 import com.example.The.Big.Project.repository.BookRepository;
+import com.example.The.Big.Project.repository.UserRepository;
 import com.example.The.Big.Project.repository.RatingRepository;
 import com.example.The.Big.Project.service.interfaces.IRatingService;
 import jakarta.transaction.Transactional;
@@ -12,16 +14,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RatingService implements IRatingService {
-    @Autowired
-    RatingRepository ratingRepository;
 
     @Autowired
-    BookRepository bookRepository;
+    private RatingRepository ratingRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<Rating> getAllRatings() {
@@ -45,35 +49,49 @@ public class RatingService implements IRatingService {
 
     @Override
     @Transactional
-    public Rating saveRating(Integer bookId, Rating rating) {
+    public Rating saveRating(Integer bookId, Integer userId, Rating rating) {
+        // Ensure the book exists
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found"));
+
+        // Ensure the user exists
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        // Set the book and user in the rating
         rating.setBook(book);
+        rating.setUser(user);
+
+        // Calculate and set the average rating
         updateAverageRating(rating);
 
+        // Save rating to repository
         return ratingRepository.save(rating);
     }
 
     @Override
     public void deleteRating(Integer id) {
-        Optional<Rating> ratingOptional = ratingRepository.findById(id);
-        if (ratingOptional.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating " + id + " not found.");
-        }
+        // Check if rating exists, if not throw exception
+        ratingRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating " + id + " not found."));
+        // If exists, delete by ID
         ratingRepository.deleteById(id);
     }
 
     @Override
     public void updateRating(Integer id) {
-    //keeping as a placeholder, deleting this line will cause everything to crumble. No idea why.
+        // Placeholder for update logic
     }
 
     @Override
     public List<Rating> updateAverageRating() {
-    //same thing here, the fate of humanity lies with keeping these two empty methods
+        // Placeholder for bulk update function, returns empty list
         return List.of();
     }
 
-
+    @Override
+    public Rating saveRating(Integer bookId, Rating rating) {
+        // Redundant method, provide clear instruction to use the correct method
+        throw new UnsupportedOperationException("Use saveRating(Integer bookId, Integer userId, Rating rating) instead.");
+    }
 }
-
