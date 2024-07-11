@@ -1,10 +1,7 @@
 package com.example.The.Big.Project.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +15,9 @@ public class Author {
     private String name;
     private String bio;
     private String website;
+
+    @Embedded
+    private UserDetails userDetails;
 
     @Override
     public String toString() {

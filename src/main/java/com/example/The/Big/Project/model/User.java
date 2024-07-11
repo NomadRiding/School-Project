@@ -1,11 +1,10 @@
 package com.example.The.Big.Project.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Data;
 import  lombok.NoArgsConstructor;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +18,8 @@ public class User {
     private String username;
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings;
 
     @Override
     public String toString() {
