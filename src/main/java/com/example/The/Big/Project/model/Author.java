@@ -19,6 +19,9 @@ public class Author {
     @Embedded
     private UserDetails userDetails;
 
+    public Author(int i, String updatedAuthor) {
+    }
+
     @Override
     public String toString() {
         return "Author{" +

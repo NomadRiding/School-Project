@@ -1,10 +1,7 @@
 package com.example.The.Big.Project.controller.impl;
 
 import com.example.The.Big.Project.model.Book;
-import com.example.The.Big.Project.model.Rating;
-import com.example.The.Big.Project.service.impl.BookService;
 import com.example.The.Big.Project.service.interfaces.IBookService;
-import com.example.The.Big.Project.service.interfaces.IRatingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +14,7 @@ import java.util.List;
 public class BookController implements IBookService{
 
     @Autowired
-    IBookService bookService;
+    private IBookService bookService;
 
 
 
@@ -30,7 +27,7 @@ public class BookController implements IBookService{
     }
 
     @GetMapping("/books/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK) // This should be OK instead of CREATED
     public Book getBookById(@PathVariable Integer id) {
         return bookService.getBookById(id);
     }
@@ -38,8 +35,8 @@ public class BookController implements IBookService{
 
     //  ****************************************************  POST  ****************************************************
 
-    @PostMapping("/books/{id}")
-    public Book createBook(@PathVariable Integer id, @RequestBody Book book){
+    @PostMapping("/books")
+    public Book createBook(@RequestBody @Valid Book book) {
         return bookService.saveBook(book);
     }
 
@@ -49,7 +46,7 @@ public class BookController implements IBookService{
 
     @PutMapping("/books/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBook(@RequestBody @Valid Book book, @PathVariable Integer id){
+    public void updateBook(@RequestBody @Valid Book book, @PathVariable Integer id) {
         bookService.updateBook(book, id);
     }
 
