@@ -19,7 +19,7 @@ public class Rating {
     private Integer worldDevelopment;
     private Integer reRead;
     @Column(name = "average_rating")
-    private double averageRating;
+    private double averageRating = 0.0;
 
     @JsonBackReference
     @ManyToOne

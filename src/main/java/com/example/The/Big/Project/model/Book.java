@@ -21,6 +21,10 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
 
+    @JsonManagedReference
+    @ManyToMany(mappedBy = "books")
+    private List<User> users;
+
     @ManyToOne
     private Author author;
 
